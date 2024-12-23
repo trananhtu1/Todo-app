@@ -1,0 +1,4 @@
+// Tạo file index.scss trong thư mục abstracts để forward các module
+@use 'sass:color';
+@forward 'variables';
+@forward 'mixins';

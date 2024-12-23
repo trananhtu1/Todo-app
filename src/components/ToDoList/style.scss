@@ -1,0 +1,17 @@
+@use '../../styles/abstracts' as *;
+@use 'sass:color';
+.todo-list {
+ @include flex(column);
+ gap: $spacing-sm;
+ margin-top: $spacing-lg;
+  &-loading,
+ &-error,
+ &-empty {
+   text-align: center;
+   padding: $spacing-lg;
+   color: color.adjust($text-color, $lightness: 30%);  // Thay thế lighten()
+ }
+  &-error {
+   color: $danger-color;
+ }
+}

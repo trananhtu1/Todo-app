@@ -1,0 +1,32 @@
+@use '../../styles/abstracts' as *;
+@use 'sass:color';
+.todo-item {
+    @include flex(row, space-between);
+    padding: $spacing-md;
+    border-bottom: $border-width solid $border-color;
+    transition: background-color $transition-duration ease;
+     &:hover {
+      background-color: color.adjust($primary-color, $alpha: -0.95); // Thay vì rgba
+    }
+     &.completed {
+      .todo-title {
+        text-decoration: line-through;
+        color: color.adjust($text-color, $lightness: 40%);
+      }
+    }
+
+  .todo-checkbox {
+    cursor: pointer;
+  }
+
+  .todo-title {
+    flex: 1;
+    margin: 0 $spacing-md;
+    transition: color $transition-duration ease;
+  }
+
+  .delete-button {
+    @include button($danger-color);
+    padding: $spacing-xs $spacing-sm;
+  }
+}

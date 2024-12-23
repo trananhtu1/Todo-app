@@ -1,0 +1,41 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+@mixin flex($direction: row, $justify: flex-start, $align: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+  }
+  
+  @mixin button($bg-color: $primary-color, $color: white) {
+    padding: $spacing-sm $spacing-md;
+    background-color: $bg-color;
+    color: $color;
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: background-color $transition-duration ease;
+  
+    &:hover {
+      background-color: color.adjust($bg-color, $lightness: 10%);
+    }
+  
+    &:active {
+      background-color: color.adjust($bg-color, $lightness: -5%);
+    }
+  }
+  
+  @mixin input-base {
+    width: 100%;
+    padding: $spacing-sm;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    font-size: $font-size-md;
+    transition: border-color $transition-duration ease;
+  
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }

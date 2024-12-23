@@ -1,0 +1,19 @@
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+body {
+  margin: 0;
+  font-family: $font-family;
+}
+
+.app {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: $spacing-lg;
+
+  h1 {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+    color: $text-color;
+  }
+}
