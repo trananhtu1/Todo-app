@@ -5,7 +5,8 @@ import {
   getDocs, 
   updateDoc, 
   deleteDoc, 
-  doc 
+  doc ,
+  getDoc
 } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import {
@@ -61,21 +62,37 @@ function* addTodoSaga(action) {
   }
 }
 
+
 function* updateTodoSaga(action) {
   try {
     console.log('[updateTodoSaga] - Updating todo with payload:', action.payload);
     const { id, ...updates } = action.payload;
 
     const todoRef = doc(db, 'todos', id);
-    yield call(updateDoc, todoRef, updates);
+    
+    // Lấy dữ liệu hiện tại từ Firestore trước khi cập nhật
+    const currentDoc = yield call(getDoc, todoRef);
+    if (!currentDoc.exists()) {
+      throw new Error(`Todo với ID: ${id} không tồn tại.`);
+    }
+
+    // Bảo toàn dữ liệu hiện tại, chỉ cập nhật các trường được truyền trong payload
+    const currentData = currentDoc.data();
+    const updatedData = {
+      ...currentData,
+      ...updates, // Ghi đè giá trị mới lên dữ liệu cũ
+    };
+
+    yield call(updateDoc, todoRef, updatedData);
 
     console.log('[updateTodoSaga] - Todo updated successfully with ID:', id);
-    yield put(updateTodoSuccess(action.payload));
+    yield put(updateTodoSuccess({ id, ...updatedData }));
   } catch (error) {
     console.error('[updateTodoSaga] - Error updating todo:', error);
     yield put(setError(error.message));
   }
 }
+
 
 function* deleteTodoSaga(action) {
   try {

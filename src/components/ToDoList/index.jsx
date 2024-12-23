@@ -10,12 +10,11 @@ const TodoList = () => {
 
   useEffect(() => {
     if (error && retryCount < 3) {
-      // Thử lại sau 5 giây
       const timer = setTimeout(() => {
         dispatch(clearError());
         dispatch({ type: 'todos/fetchTodosStart' });
       }, 5000);
-      
+
       return () => clearTimeout(timer);
     }
   }, [error, retryCount, dispatch]);
@@ -38,9 +37,17 @@ const TodoList = () => {
   }
 
   return (
+    //newest 
     <div className="todo-list">
       {todos.map(todo => (
-        <TodoItem key={todo.id} todo={todo} />
+      <TodoItem
+        key={todo.id}
+        todo={{
+          id: todo?.id || '',
+          title: todo?.title || 'Không có tiêu đề',
+          completed: todo?.completed ?? false
+        }}
+      />
       ))}
     </div>
   );

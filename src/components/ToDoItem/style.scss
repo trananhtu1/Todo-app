@@ -29,4 +29,18 @@
     @include button($danger-color);
     padding: $spacing-xs $spacing-sm;
   }
+  .save-button {
+    @include button($success-color);
+    padding: $spacing-xs $spacing-sm;
+  }
+  .cancel-button {
+    @include button($primary-color);
+    padding: $spacing-xs $spacing-sm;
+  }
+  
+  .edit-button {
+    @include button($warning-color);
+    padding: $spacing-xs $spacing-sm;
+  }
+
 }
