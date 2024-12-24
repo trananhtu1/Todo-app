@@ -13,7 +13,7 @@ Todo App là một ứng dụng quản lý công việc đơn giản, cho phép 
 
 1. Clone dự án về máy của bạn:
    ```bash
-   git clone https://github.com/yourusername/todo-app.git
+   git clone https://github.com/trananhtu1/Todo-app
    cd todo-app
    ```
 
