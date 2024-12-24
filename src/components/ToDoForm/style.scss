@@ -2,31 +2,37 @@
 
 .todo-form {
   @include flex(column);
-  gap: $spacing-md;
-  margin-bottom: $spacing-lg;
+  width: 100%; // Chiếm toàn bộ chiều rộng
+  max-width: 600px; // Đặt chiều rộng tối đa
+  margin: 0 auto; // Căn giữa
 
   .form-group {
     width: 100%;
-    position: relative;
-  }
+    @include flex(row, space-between, center);
 
-  .form-input {
-    @include input-base;
+    .form-input {
+      @include input-base;
+      flex: 1;
+      border-radius: 0; // Input không góc tròn
+      border-right: $border-width solid $border-color; // Đường viền bên phải
 
-    &.error {
-      border-color: $danger-color;
+      &.error {
+        border-color: $danger-color;
+      }
     }
-  }
 
-  .error-message {
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    color: $danger-color;
-    font-size: $font-size-sm;
+    .error-message {
+      color: $danger-color;
+      font-size: $font-size-sm;
+      margin-top: $spacing-xs;
+    }
   }
 
   .submit-button {
     @include button($primary-color);
+    flex-shrink: 0;
+    border-radius: 0; // Nút không góc tròn
   }
 }
+
+

@@ -1,17 +1,61 @@
 @use '../../styles/abstracts' as *;
-@use 'sass:color';
-.todo-list {
- @include flex(column);
- gap: $spacing-sm;
- margin-top: $spacing-lg;
-  &-loading,
- &-error,
- &-empty {
-   text-align: center;
-   padding: $spacing-lg;
-   color: color.adjust($text-color, $lightness: 30%);  // Thay thế lighten()
- }
-  &-error {
-   color: $danger-color;
- }
+
+// Container cho danh sách công việc
+.todo-list-container {
+  width: 100%; // Chiếm toàn bộ chiều rộng
+  max-width: 600px; // Đặt chiều rộng tối đa
+  background-color: $bg-color; // Màu nền
+  
+
+  // Kiểu cho thanh filter
+  .todo-list-filters {
+    @include flex(row, space-between, center); // Căn chỉnh theo hàng
+    gap: $spacing-md; // Khoảng cách giữa các phần tử
+    padding: $spacing-sm 0; // Khoảng cách bên trên và dưới
+    border-top: $border-width solid $border-color; // Đường viền trên
+    border-bottom: $border-width solid $border-color; // Đường viền dưới
+    border-left: $border-width solid $border-color; // Đường viền bên trái
+    border-right: $border-width solid $border-color; // Đường viền bên phải
+
+    // Kiểu cho nhóm nút filter
+    .filter-buttons {
+      @include flex(row, space-between, center); // Căn chỉnh theo hàng
+      gap: $spacing-sm; // Khoảng cách giữa các nút
+
+      // Kiểu cho từng nút filter
+      .filter-button {
+        @include button( $text-color); // Sử dụng mixin button
+        color: $text-color;
+        background-color: white;
+        border: none; // Không có đường viền
+        font-size: $font-size-sm; // Kích thước chữ
+        padding: $spacing-xs $spacing-sm; // Khoảng cách bên trong
+
+        // Kiểu cho nút đang hoạt động
+        &.active {
+          background-color: $primary-color; // Màu nền khi active
+          color: white; // Màu chữ
+        }
+      }
+    }
+
+    // Kiểu cho nút xóa tất cả công việc đã hoàn thành
+    .clear-completed {
+      @include button($text-color); // Sử dụng mixin button
+      color: $text-color;
+      background-color: white;
+      border: none; // Không có đường viền
+      justify-content: space-between; // Căn giữa các phần tử
+      &.active {
+        background-color: $primary-color; // Màu nền khi active
+        color: white; // Màu chữ
+      }
+    }
+
+    // Kiểu cho thanh trạng thái
+    .status-bar {
+      font-size: $font-size-sm; // Kích thước chữ
+      color: $text-color; // Màu chữ
+    }
+  }
 }

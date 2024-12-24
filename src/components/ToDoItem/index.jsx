@@ -7,7 +7,7 @@ const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(todo?.title || ''); // Giá trị mặc định
-
+  const [isHovered, setIsHovered] = useState(false); // Thêm state để theo dõi hover
   //newest 
   const handleToggle = () => {
     dispatch({
@@ -23,9 +23,9 @@ const TodoItem = ({ todo }) => {
     });
   };
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
+  // const handleEdit = () => {
+  //   setIsEditing(true);
+  // };
 
   const handleSave = () => {
     if (editedTitle.trim() === '') return; // Ngăn lưu nếu tiêu đề trống
@@ -46,7 +46,10 @@ const TodoItem = ({ todo }) => {
   }
 
   return (
-    <div className={`todo-item ${todo.completed ? 'completed' : ''}`}>
+    <div className={`todo-item ${todo.completed ? 'completed' : ''}`}
+    onMouseEnter={() => setIsHovered(true)} // Khi di chuột vào
+    onMouseLeave={() => setIsHovered(false)} // Khi rời chuột
+    >
       <input
         type="checkbox"
         checked={todo.completed}
@@ -67,12 +70,14 @@ const TodoItem = ({ todo }) => {
       ) : (
         <>
           <span className="todo-title">{todo.title}</span>
-          <button onClick={handleEdit} className="edit-button">Chỉnh sửa</button>
+          {/* <button onClick={handleEdit} className="edit-button">Chỉnh sửa</button> */}
         </>
       )}
-      <button onClick={handleDelete} className="delete-button">
-        Xóa
-      </button>
+      {isHovered && ( // Chỉ hiển thị nút delete khi hover
+        <button onClick={handleDelete} className="delete-button">
+          X
+        </button>
+      )}
     </div>
   );
 };

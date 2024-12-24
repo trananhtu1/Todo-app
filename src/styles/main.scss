@@ -1,17 +1,17 @@
 @use 'abstracts/variables' as *;
 @use 'abstracts/mixins' as *;
 
-body {
-  margin: 0;
-  font-family: $font-family;
-}
 
-.app {
+
+.app-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: $spacing-lg;
+  display: flex;
+  flex-direction: column; // Căn giữa theo chiều dọc
+  align-items: center; // Căn giữa theo chiều ngang
+  
 
-  h1 {
+  .h1 {
     text-align: center;
     margin-bottom: $spacing-lg;
     color: $text-color;

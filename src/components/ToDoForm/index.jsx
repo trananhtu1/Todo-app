@@ -24,7 +24,7 @@ const TodoForm = () => {
     //Dùng Yup để định nghĩa các quy tắc kiểm tra cho form
     validationSchema: Yup.object({
       title: Yup.string()
-        .required('Vui lòng nhập công việc')
+        //.required('Vui lòng nhập công việc')
         .min(3, 'Tiêu đề phải có ít nhất 3 ký tự')
         .max(100, 'Tiêu đề không được quá 100 ký tự')
     }),
@@ -39,6 +39,7 @@ const TodoForm = () => {
     //Sử dụng onSubmit được Formik cung cấp (formik.handleSubmit) để xử lý khi form được submit.
     <form onSubmit={formik.handleSubmit} className="todo-form">
       <div className="form-group">
+        
         <input
           type="text"
           name="title"
@@ -53,9 +54,9 @@ const TodoForm = () => {
           <div className="error-message">{formik.errors.title}</div>
         )}
       </div>
-      <button type="submit" className="submit-button">
+      {/* <button type="submit" className="submit-button">
         Thêm
-      </button>
+      </button> */}
     </form>
   );
 };

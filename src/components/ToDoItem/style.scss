@@ -1,46 +1,46 @@
 @use '../../styles/abstracts' as *;
-@use 'sass:color';
+
+// Định nghĩa kiểu cho từng item trong danh sách công việc
 .todo-item {
-    @include flex(row, space-between);
-    padding: $spacing-md;
-    border-bottom: $border-width solid $border-color;
-    transition: background-color $transition-duration ease;
-     &:hover {
-      background-color: color.adjust($primary-color, $alpha: -0.95); // Thay vì rgba
-    }
-     &.completed {
-      .todo-title {
-        text-decoration: line-through;
-        color: color.adjust($text-color, $lightness: 40%);
-      }
-    }
+  @include flex(row); // Sử dụng mixin flex để căn chỉnh theo hàng
+  background-color: $bg-color; // Màu nền của item
+  padding: $spacing-sm; // Khoảng cách bên trong
+  border: $border-width solid $border-color; // Đường viền
+  //border-radius: $border-radius; // Bo tròn góc
+  transition: background-color $transition-duration ease; // Hiệu ứng chuyển màu nền
+  width: 97%; // Chiếm toàn bộ chiều rộng
 
+  // Kiểu cho item đã hoàn thành
+  &.completed {
+    text-decoration: line-through; // Gạch ngang tiêu đề
+    color: $text-color; // Màu chữ
+    opacity: 0.6; // Độ mờ
+  }
+
+  // Hiệu ứng hover
+  &:hover {
+    background-color: rgb(175, 175, 175); // Màu nền khi hover
+  }
+
+  // Kiểu cho checkbox
   .todo-checkbox {
-    cursor: pointer;
+    margin-right: $spacing-sm; // Khoảng cách bên phải
   }
 
+  // Kiểu cho tiêu đề công việc
   .todo-title {
-    flex: 1;
-    margin: 0 $spacing-md;
-    transition: color $transition-duration ease;
+    flex: 1; // Chiếm toàn bộ chiều rộng còn lại
+    font-size: $font-size-md; // Kích thước chữ
   }
 
+  // Kiểu cho nút xóa
   .delete-button {
-    @include button($danger-color);
-    padding: $spacing-xs $spacing-sm;
-  }
-  .save-button {
-    @include button($success-color);
-    padding: $spacing-xs $spacing-sm;
-  }
-  .cancel-button {
-    @include button($primary-color);
-    padding: $spacing-xs $spacing-sm;
-  }
-  
-  .edit-button {
-    @include button($warning-color);
-    padding: $spacing-xs $spacing-sm;
-  }
+    background-color: transparent; // Nền trong suốt
+    opacity: 0.8; // Độ mờ
 
+    // Hiệu ứng hover cho nút xóa
+    &:hover {
+      opacity: 1; // Độ mờ khi hover
+    }
+  }
 }
